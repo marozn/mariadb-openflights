@@ -18,7 +18,7 @@ This repository contains a Dockerfile for deployment of a MariaDB 11.8 container
 Clone this repository to your local machine:
 
 ```bash
-git clone https://github.com/rozhnev/mariadb-openflights.git
+git clone https://github.com/marozn/mariadb-openflights
 cd mariadb-openflights
 ```
 
@@ -40,24 +40,7 @@ Run the container with default settings:
 docker run -d \
   --name openflights-db \
   -e MARIADB_ROOT_PASSWORD=yourpassword \
-  -e MARIADB_DATABASE=openflights \
   -p 3306:3306 \
-  mariadb-openflights
-```
-
-### Custom Configuration
-
-Run with custom environment variables:
-
-```bash
-docker run -d \
-  --name openflights-db \
-  -e MARIADB_ROOT_PASSWORD=yourpassword \
-  -e MARIADB_DATABASE=openflights \
-  -e MARIADB_USER=openflights \
-  -e MARIADB_PASSWORD=openflights \
-  -p 3306:3306 \
-  -v openflights-data:/var/lib/mysql \
   mariadb-openflights
 ```
 
@@ -73,7 +56,6 @@ services:
     container_name: openflights-db
     environment:
       MARIADB_ROOT_PASSWORD: yourpassword
-      MARIADB_DATABASE: openflights
       MARIADB_USER: openflights
       MARIADB_PASSWORD: openflights
     ports:
@@ -93,16 +75,16 @@ docker-compose up -d
 
 ## Connect to Database
 
-### Using MySQL Client
+### Using MariaDB Client
 
 ```bash
-mysql -h localhost -P 3306 -u root -p
+mariadb -h localhost -P 3306 -u root -p
 ```
 
 ### Using Docker Exec
 
 ```bash
-docker exec -it openflights-db mysql -u root -p
+docker exec -it openflights-db mariadb -u root -p
 ```
 
 ## Database Schema
@@ -117,7 +99,6 @@ The container includes the following tables:
 ## Environment Variables
 
 - `MARIADB_ROOT_PASSWORD` - Root password for MariaDB (required)
-- `MARIADB_DATABASE` - Database name (default: openflights)
 - `MARIADB_USER` - Non-root user name
 - `MARIADB_PASSWORD` - Password for the non-root user
 
