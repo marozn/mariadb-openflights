@@ -1,9 +1,9 @@
-CREATE DATABASE flightdb2;
+CREATE DATABASE openflights;
 
 CREATE USER openflights@localhost;
-GRANT ALL PRIVILEGES ON flightdb2.* TO openflights@localhost;
+GRANT ALL PRIVILEGES ON openflights.* TO openflights@localhost;
 
-CONNECT flightdb2;
+CONNECT openflights;
 
 DROP TABLE IF EXISTS `airlines`;
 CREATE TABLE `airlines` (

@@ -1,4 +1,4 @@
-USE flightdb2;
+USE openflights;
 
 SET GLOBAL local_infile = 'ON';
 
@@ -56,5 +56,11 @@ FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 (locale, name);
+
+LOAD DATA LOCAL INFILE 'data/airports-dafif.dat'
+INTO TABLE airports_dafif
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\n'
+(code, name, icao, iata, x, y, elevation);
 
 \! echo Done.
