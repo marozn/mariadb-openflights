@@ -23,7 +23,7 @@ CREATE TABLE `airlines` (
   PRIMARY KEY  (`alid`),
   KEY `iata` (`iata`),
   KEY `icao` (`icao`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `airports`;
 CREATE TABLE `airports` (
@@ -47,7 +47,7 @@ CREATE TABLE `airports` (
   KEY `x` (`x`),
   KEY `y` (`y`),
   KEY `iata` (`iata`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 CREATE UNIQUE INDEX `iata_idx` ON airports(iata);
 CREATE UNIQUE INDEX `icao_idx` ON airports(icao);
 
@@ -62,7 +62,7 @@ CREATE TABLE `airports_dafif` (
   `y` double NOT NULL,
   `elevation` int(11) default NULL,
   PRIMARY KEY  (`icao`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `airports_oa`;
 CREATE TABLE `airports_oa` (
@@ -85,7 +85,7 @@ CREATE TABLE `airports_oa` (
   `wp_link` text,
   `keywords` text,
   PRIMARY KEY  (`oaid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `countries`;
 CREATE TABLE `countries` (
@@ -93,14 +93,14 @@ CREATE TABLE `countries` (
   `iso_code` varchar(2) default NULL,
   `dafif_code` varchar(2) NOT NULL,
   PRIMARY KEY  (`dafif_code`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `countries_oa`;
 CREATE TABLE `countries_oa` (
   `oacode` text,
   `country` text,
   `continent` text
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `flights`;
 CREATE TABLE `flights` (
@@ -132,14 +132,14 @@ CREATE TABLE `flights` (
   KEY `alid` (`alid`),
   KEY `trid` (`trid`),
   KEY `uid` (`uid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `locales`;
 CREATE TABLE `locales` (
   `locale` varchar(5) NOT NULL,
   `name` text,
   PRIMARY KEY  (`locale`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `planes`;
 CREATE TABLE `planes` (
@@ -153,7 +153,7 @@ CREATE TABLE `planes` (
   `frequency` int(11) default 0,
   PRIMARY KEY  (`plid`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `routes`;
 CREATE TABLE `routes` (
@@ -172,7 +172,7 @@ CREATE TABLE `routes` (
   UNIQUE KEY `alid` (`alid`,`src_apid`,`dst_apid`),
   KEY `src_apid` (`src_apid`),
   KEY `dst_apid` (`dst_apid`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `trips`;
 CREATE TABLE `trips` (
@@ -183,7 +183,7 @@ CREATE TABLE `trips` (
   `public` text,
   PRIMARY KEY  (`trid`),
   KEY `uid` (`uid`)
-) ENGINE=MyISAM AUTO_INCREMENT=84 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
@@ -201,7 +201,7 @@ CREATE TABLE `users` (
   `locale` varchar(5) default 'en_US',
   `units` varchar(1) default 'M',
   PRIMARY KEY  (`uid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `tripit_tokens`;
 CREATE TABLE `tripit_tokens` (
@@ -210,7 +210,7 @@ CREATE TABLE `tripit_tokens` (
   `auth_token_secret` char(40) NOT NULL,
   `active` enum('N','Y') NOT NULL DEFAULT 'Y',
   KEY `uid_idx` (`uid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-\! echo Done, next run sql/load-data.sql
+\! echo Done, next run sql/2-load-data.sql
 
