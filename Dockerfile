@@ -1,6 +1,4 @@
 FROM  mariadb:11.8
 
-COPY  openflights/data/*.dat /data/
-
-COPY  openflights/sql/create.sql /docker-entrypoint-initdb.d/1-create.sql
-COPY  openflights/sql/load-data.sql /docker-entrypoint-initdb.d/2-load-data.sql
+COPY  openflights/structure.sql /docker-entrypoint-initdb.d/1-create-structure.sql
+COPY  openflights/data.sql /docker-entrypoint-initdb.d/2-load-data.sql
